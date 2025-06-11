@@ -7,10 +7,12 @@
 
 @theme inline {
   --color-primary: #5d5fef;
+  --color-secondary: #f17300;
   --color-muted: #98949e;
   --color-border: #d1d0d366;
   --color-error: #8f0a13;
   --color-error-light: #fef5f6;
+  --color-neutral: #fafafa;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-satoshi: var(--font-satoshi-variable);
