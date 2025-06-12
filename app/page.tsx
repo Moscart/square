@@ -19,7 +19,7 @@ export default function Home() {
       {/* Main Content */}
       <main className="flex-1 p-6 h-full overflow-y-auto">
         <div className="flex flex-col gap-4 max-w-6xl mx-auto">
-          <div className="grid grid-cols-2 border-b border-border">
+          <div className="grid xl:grid-cols-2 border-b border-border">
             <div className="">
               <div className="font-bold text-2xl">Customer</div>
               <div className="font-medium text-sm text-muted mt-1 mb-4">
@@ -41,9 +41,9 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="max-xl:grid flex gap-4">
-            <div className="grow flex flex-col gap-6">
-              <div className=" p-3 rounded-lg text-white flex flex-col gap-4 relative overflow-hidden">
+          <div className="max-xl:grid flex gap-4 overflow-hidden">
+            <div className="grow flex flex-col gap-6 overflow-hidden">
+              <div className="p-3 rounded-lg text-white flex flex-col gap-4 relative overflow-hidden">
                 <div className="max-w-[341px] flex flex-col gap-1">
                   <div className="font-bold text-xl">Customer</div>
                   <div className="font-satoshi font-medium text-xs leading-[200%] tracking-[0.02em]">
@@ -52,8 +52,8 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="max-lg:grid flex gap-4">
-                  <div className="flex gap-4 grow">
-                    <button className="font-semibold text-sm flex gap-2 items-center bg-white/20 rounded-lg py-2 px-4">
+                  <div className="max-md:grid flex gap-4 grow">
+                    <button className="font-semibold w-fit text-sm flex gap-2 items-center bg-white/20 backdrop-blur-[10px] rounded-lg py-2 px-4">
                       <Add size="16" />
                       <span className="line-clamp-1">Add New Customer</span>
                     </button>
@@ -102,9 +102,9 @@ export default function Home() {
                   />
                 </div>
               </div>
-              <div className="flex flex-col gap-14">
+              <div className="flex flex-col max-sm:gap-8 gap-14">
                 <div className="rounded-sm overflow-hidden overflow-x-auto">
-                  <table className="w-full">
+                  <table className="min-w-fit w-full whitespace-nowrap">
                     <thead>
                       <tr>
                         <th>Customer Name</th>
@@ -222,8 +222,8 @@ export default function Home() {
                     </tbody>
                   </table>
                 </div>
-                <div className="flex items-center justify-between bg-neutral rounded-lg py-2 px-3">
-                  <div className="font-semibold text-muted">
+                <div className="max-sm:flex-col flex gap-4 items-center justify-between bg-neutral rounded-lg py-2 px-3">
+                  <div className="max-sm:text-sm font-semibold text-muted">
                     Showing 10 Data Customers
                   </div>
                   <div className="flex text-sm">
@@ -259,7 +259,7 @@ export default function Home() {
                 <div className="size-[323px] absolute bg-[#7879F1] rounded-full border border-[#FFFFFF] bottom-[130px] translate-y-full right-[98px] translate-x-full -z-10"></div>
                 <div className="size-[323px] absolute bg-[#A5A6F6] rounded-full border border-[#F2F2F2] bottom-[100px] translate-y-full right-[56px] translate-x-full -z-10"></div>
               </div>
-              <div className="max-xl:col-span-3 bg-neutral rounded-xl p-4 max-xl:grid max-xl:grid-cols-3 flex flex-col gap-3 max-xl:h-auto h-[595px] relative overflow-hidden">
+              <div className="max-xl:col-span-3 bg-neutral rounded-xl p-4 max-sm:flex max-xl:grid max-xl:grid-cols-3 flex flex-col gap-3 max-sm:h-[595px] max-xl:h-auto h-[595px] relative overflow-hidden">
                 <div className="flex flex-col gap-3">
                   <div className="text-2xl">
                     <div className="font-medium">Top Menu</div>
@@ -291,7 +291,7 @@ export default function Home() {
                 </div>
                 <div className="absolute bottom-0 left-0 max-xl:w-full">
                   <Image
-                    className="object-cover max-xl:w-1/3"
+                    className="object-cover max-sm:w-full max-xl:w-1/3"
                     src={"/images/graph.png"}
                     width={1000}
                     height={1000}
