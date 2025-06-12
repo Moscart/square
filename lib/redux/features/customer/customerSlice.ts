@@ -4,7 +4,7 @@ import { customerData } from "./dummyData";
 export type CustomerLevel = "warga" | "juragan" | "sultan" | "konglomerat";
 
 export interface CustomerItem {
-  id?: string;
+  id: string;
   name: string;
   level: CustomerLevel;
   favorite_menu: string;
@@ -33,9 +33,12 @@ const customerSlice = createSlice({
       };
       state.items.push(newItem);
     },
+    deleteCustomer: (state, action: PayloadAction<string>) => {
+      state.items = state.items.filter((item) => item.id !== action.payload);
+    },
   },
 });
 
-export const { addCustomer } = customerSlice.actions;
+export const { addCustomer, deleteCustomer } = customerSlice.actions;
 
 export default customerSlice.reducer;

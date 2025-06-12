@@ -12,7 +12,7 @@ import {
   ShieldSearch,
   Trash,
 } from "iconsax-reactjs";
-import Sidebar from "./_components/Sidebars";
+import Sidebar from "./_components/Sidebar";
 import Image from "next/image";
 import { useAppSelector } from "@/lib/redux/hooks";
 import { LevelBadge } from "./_components/LevelBadge";
@@ -21,6 +21,7 @@ import PaginationControl from "./_components/PaginationControl";
 import {
   addCustomer,
   CustomerItem,
+  deleteCustomer,
 } from "@/lib/redux/features/customer/customerSlice";
 import { useDispatch } from "react-redux";
 
@@ -28,6 +29,7 @@ export default function Home() {
   const dispatch = useDispatch();
   const allCustomer = useAppSelector((state) => state.customer.items);
   const initialData: CustomerItem = {
+    id: "",
     name: "",
     favorite_menu: "",
     level: "warga",
@@ -98,13 +100,17 @@ export default function Home() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     dispatch(addCustomer(formData));
     if (modalToggleRef.current) {
       modalToggleRef.current.checked = false;
     }
     setFormData(initialData);
+  };
+
+  const handleDelete = (id: string) => {
+    dispatch(deleteCustomer(id));
   };
 
   const numberFormat = (value: number) =>
@@ -359,7 +365,10 @@ export default function Home() {
                                 <button className="py-1 px-3 flex gap-2 items-center bg-neutral rounded-sm">
                                   <Edit2 size="12" variant="TwoTone" />
                                 </button>
-                                <button className="py-1 px-3 flex gap-2 items-center bg-[#FEF5F6] text-error rounded-sm">
+                                <button
+                                  className="py-1 px-3 flex gap-2 items-center bg-[#FEF5F6] text-error rounded-sm"
+                                  onClick={() => handleDelete(customer.id)}
+                                >
                                   <Trash size="12" variant="TwoTone" />
                                 </button>
                               </div>
@@ -443,6 +452,7 @@ export default function Home() {
           </div>
         </div>
 
+        {/* Modal Add Customer */}
         <div className="">
           <input
             type="checkbox"
