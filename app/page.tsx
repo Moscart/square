@@ -2,7 +2,8 @@
 
 import {
   Add,
-  ArrowRight,
+  ArrowDown2,
+  ArrowUp2,
   Edit2,
   Filter,
   Printer,
@@ -17,20 +18,43 @@ import { useAppSelector } from "@/lib/redux/hooks";
 import { LevelBadge } from "./_components/LevelBadge";
 import { useState } from "react";
 import PaginationControl from "./_components/PaginationControl";
+import { CustomerItem } from "@/lib/redux/features/customer/customerSlice";
 
 export default function Home() {
   const allCustomer = useAppSelector((state) => state.customer.items);
   const [searchCustomer, setSearchCustomer] = useState("");
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [sortBy, setSortBy] = useState<string>("");
+  const [order, setOrder] = useState("asc");
   const itemsPerPage = 10;
 
   const filteredItems = allCustomer.filter((customer) =>
     customer.name.toLowerCase().includes(searchCustomer.toLowerCase())
   );
 
+  const sortedItems = () => {
+    if (!sortBy) return filteredItems;
+
+    return [...filteredItems].sort((a, b) => {
+      const valA = a[sortBy as keyof CustomerItem];
+      const valB = b[sortBy as keyof CustomerItem];
+
+      if (typeof valA === "string" && typeof valB === "string") {
+        const cmp = valA.localeCompare(valB);
+        return order === "asc" ? cmp : -cmp;
+      }
+
+      if (typeof valA === "number" && typeof valB === "number") {
+        return order === "asc" ? valA - valB : valB - valA;
+      }
+
+      return 0;
+    });
+  };
+
   const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
 
-  const pageItems = filteredItems.slice(
+  const pageItems = sortedItems().slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
@@ -43,6 +67,15 @@ export default function Home() {
   const handlePageChange = (newPage: number) => {
     if (newPage < 1 || newPage > totalPages) return;
     setCurrentPage(newPage);
+  };
+
+  const handleSort = (key: string) => {
+    setSortBy(key);
+    if (sortBy !== key || order == "desc") {
+      setOrder("asc");
+    } else {
+      setOrder("desc");
+    }
   };
 
   const numberFormat = (value: number) =>
@@ -144,10 +177,132 @@ export default function Home() {
                   <table className="min-w-fit w-full whitespace-nowrap">
                     <thead>
                       <tr>
-                        <th>Customer Name</th>
-                        <th>Level</th>
-                        <th>Favorite Menu</th>
-                        <th>Total Transaction</th>
+                        <th>
+                          <button
+                            className="flex items-center justify-between gap-4 w-full cursor-pointer"
+                            onClick={() => handleSort("name")}
+                          >
+                            <span>Customer Name</span>
+                            {sortBy === "name" && order === "asc" && (
+                              <ArrowUp2 size={16} variant="Bold" />
+                            )}
+                            {sortBy === "name" && order === "desc" && (
+                              <ArrowDown2 size={16} variant="Bold" />
+                            )}
+                            {sortBy !== "name" && (
+                              <svg
+                                width="7"
+                                height="12"
+                                viewBox="0 0 7 12"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M0.900009 8L3.40001 10.5L5.90001 8M0.900009 4L3.40001 1.5L5.90001 4"
+                                  stroke="#98949E"
+                                  strokeWidth="1.5"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                />
+                              </svg>
+                            )}
+                          </button>
+                        </th>
+                        <th>
+                          <button
+                            className="flex items-center justify-between gap-4 w-full cursor-pointer"
+                            onClick={() => handleSort("level")}
+                          >
+                            <span>Level</span>
+                            {sortBy === "level" && order === "asc" && (
+                              <ArrowUp2 size={16} variant="Bold" />
+                            )}
+                            {sortBy === "level" && order === "desc" && (
+                              <ArrowDown2 size={16} variant="Bold" />
+                            )}
+                            {sortBy !== "level" && (
+                              <svg
+                                width="7"
+                                height="12"
+                                viewBox="0 0 7 12"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M0.900009 8L3.40001 10.5L5.90001 8M0.900009 4L3.40001 1.5L5.90001 4"
+                                  stroke="#98949E"
+                                  strokeWidth="1.5"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                />
+                              </svg>
+                            )}
+                          </button>
+                        </th>
+                        <th>
+                          <button
+                            className="flex items-center justify-between gap-4 w-full cursor-pointer"
+                            onClick={() => handleSort("favorite_menu")}
+                          >
+                            <span>Favorite Menu</span>
+                            {sortBy === "favorite_menu" && order === "asc" && (
+                              <ArrowUp2 size={16} variant="Bold" />
+                            )}
+                            {sortBy === "favorite_menu" && order === "desc" && (
+                              <ArrowDown2 size={16} variant="Bold" />
+                            )}
+                            {sortBy !== "favorite_menu" && (
+                              <svg
+                                width="7"
+                                height="12"
+                                viewBox="0 0 7 12"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M0.900009 8L3.40001 10.5L5.90001 8M0.900009 4L3.40001 1.5L5.90001 4"
+                                  stroke="#98949E"
+                                  strokeWidth="1.5"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                />
+                              </svg>
+                            )}
+                          </button>
+                        </th>
+                        <th>
+                          <button
+                            className="flex items-center justify-between gap-4 w-full cursor-pointer"
+                            onClick={() => handleSort("total_transaction")}
+                          >
+                            <span>Total Transaction</span>
+                            {sortBy === "total_transaction" &&
+                              order === "asc" && (
+                                <ArrowUp2 size={16} variant="Bold" />
+                              )}
+                            {sortBy === "total_transaction" &&
+                              order === "desc" && (
+                                <ArrowDown2 size={16} variant="Bold" />
+                              )}
+                            {sortBy !== "total_transaction" && (
+                              <svg
+                                width="7"
+                                height="12"
+                                viewBox="0 0 7 12"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M0.900009 8L3.40001 10.5L5.90001 8M0.900009 4L3.40001 1.5L5.90001 4"
+                                  stroke="#98949E"
+                                  strokeWidth="1.5"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                />
+                              </svg>
+                            )}
+                          </button>
+                        </th>
                         <th>Action</th>
                       </tr>
                     </thead>
