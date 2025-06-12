@@ -1,145 +1,21 @@
 import {
   Add,
-  BatteryFull,
-  Candle,
-  Category2,
-  Document,
+  ArrowRight,
+  Edit2,
   Filter,
-  LogoutCurve,
-  MouseSquare,
   Printer,
-  Profile2User,
   Refresh,
-  Reserve,
   SearchNormal1,
-  ShoppingCart,
-  Truck,
-  UserSquare,
+  ShieldSearch,
+  Trash,
 } from "iconsax-reactjs";
+import Sidebar from "./_components/sidebar";
+import Image from "next/image";
 
 export default function Home() {
   return (
     <div className="flex h-screen">
-      {/* Header */}
-      <aside className="w-[200px] flex flex-col justify-between border-r border-border bg-white">
-        <nav className="overflow-y-auto [&::-webkit-scrollbar]:hidden">
-          <div className="p-6">
-            <div className="flex items-center gap-1">
-              <div className="">
-                <div className="size-[17.85px] bg-primary rounded-full relative mt-1">
-                  <div className="w-[7.68px] h-[15.75px] bg-primary rounded-tr-full absolute bottom-1/2 left-0"></div>
-                </div>
-              </div>
-              <div className="text-primary font-[661] text-[27.98px]">
-                square
-              </div>
-            </div>
-          </div>
-          <div>
-            <div className="p-6 pt-0">
-              <div className="font-satoshi font-medium text-[10px] text-muted mb-2">
-                Menu
-              </div>
-              <div className="flex flex-col gap-3">
-                <div className="flex gap-3 items-center justify-between text-muted py-2">
-                  <div className="flex gap-3 items-center">
-                    <Category2 size="14" variant="TwoTone" />
-                    <span className="font-semibold text-sm">Dashboard</span>
-                  </div>
-                  <div className="float-start size-[18px] flex justify-center items-center rounded-full font-semibold text-white text-[10px] bg-linear-to-r from-[#EEA849] to-[#F46B45]">
-                    4
-                  </div>
-                </div>
-                <div className="flex gap-3 items-center justify-between text-muted py-2">
-                  <div className="flex gap-3 items-center">
-                    <BatteryFull size="14" variant="TwoTone" />
-                    <span className="font-semibold text-sm">Stock</span>
-                  </div>
-                </div>
-                <div className="flex gap-3 items-center justify-between text-primary py-2">
-                  <div className="flex gap-3 items-center">
-                    <Profile2User size="14" variant="Bulk" />
-                    <span className="font-bold text-sm">Customer</span>
-                  </div>
-                </div>
-                <div className="flex gap-3 items-center justify-between text-muted py-2">
-                  <div className="flex gap-3 items-center">
-                    <Reserve size="14" variant="TwoTone" />
-                    <span className="font-semibold text-sm">Restaurant</span>
-                  </div>
-                </div>
-                <div className="flex gap-3 items-center justify-between text-muted py-2">
-                  <div className="flex gap-3 items-center">
-                    <MouseSquare size="14" variant="TwoTone" />
-                    <span className="font-semibold text-sm">Design</span>
-                  </div>
-                </div>
-                <div className="flex gap-3 items-center justify-between text-muted py-2">
-                  <div className="flex gap-3 items-center">
-                    <Document size="14" variant="TwoTone" />
-                    <span className="font-semibold text-sm">Report</span>
-                  </div>
-                </div>
-                <div className="flex gap-3 items-center justify-between text-muted py-2">
-                  <div className="flex gap-3 items-center">
-                    <UserSquare size="14" variant="TwoTone" />
-                    <span className="font-semibold text-sm">Role & Admin</span>
-                  </div>
-                </div>
-                <div className="flex gap-3 items-center justify-between text-muted py-2">
-                  <div className="flex gap-3 items-center">
-                    <Candle size="14" variant="TwoTone" />
-                    <span className="font-semibold text-sm">Settings</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="p-6 pt-0">
-              <div className="font-satoshi font-medium text-[10px] text-muted mb-2">
-                Integration
-              </div>
-              <div className="flex flex-col gap-3">
-                <div className="flex gap-3 items-center justify-between text-muted py-2">
-                  <div className="flex gap-3 items-center">
-                    <ShoppingCart size="14" variant="TwoTone" />
-                    <span className="font-semibold text-sm">Stock</span>
-                  </div>
-                </div>
-                <div className="flex gap-3 items-center justify-between text-muted py-2">
-                  <div className="flex gap-3 items-center">
-                    <Truck size="14" variant="TwoTone" />
-                    <span className="font-semibold text-sm">Supply</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </nav>
-        <div className="p-6 border-t border-border">
-          <div className="flex flex-col gap-6">
-            <div className="flex gap-3 items-center">
-              <div className="">
-                <div className="size-9 rounded-full bg-primary overflow-hidden">
-                  s
-                </div>
-              </div>
-              <div className="">
-                <div className="font-semibold text-sm line-clamp-1">
-                  Savannah N
-                </div>
-                <div className="font-satoshi text-[10px] text-muted line-clamp-1">
-                  Food Quality Manager
-                </div>
-              </div>
-            </div>
-            <button className="font-semibold text-xs text-error bg-error-light rounded-[4px] py-2 flex gap-2 items-center justify-center">
-              <LogoutCurve size="16" variant="Bulk" />
-              <span>Logout</span>
-            </button>
-          </div>
-        </div>
-      </aside>
-
+      <Sidebar />
       {/* Main Content */}
       <main className="flex-1 p-6 h-full overflow-y-auto">
         <div className="flex flex-col gap-4 max-w-6xl mx-auto">
@@ -166,12 +42,14 @@ export default function Home() {
             </div>
           </div>
           <div className="flex gap-4">
-            <div className="grow">
-              <div className="bg-primary p-3 rounded-lg text-white">
-                <div className="font-bold text-xl">Customer</div>
-                <div className="font-satoshi font-medium text-xs">
-                  On this menu you will be able to create, edit, and also delete
-                  the customer. Also you can manage it easily.
+            <div className="grow flex flex-col gap-6">
+              <div className=" p-3 rounded-lg text-white flex flex-col gap-4 relative overflow-hidden">
+                <div className="max-w-[341px] flex flex-col gap-1">
+                  <div className="font-bold text-xl">Customer</div>
+                  <div className="font-satoshi font-medium text-xs leading-[200%] tracking-[0.02em]">
+                    On this menu you will be able to create, edit, and also
+                    delete the customer. Also you can manage it easily.
+                  </div>
                 </div>
                 <div className="flex gap-4">
                   <button className="font-semibold text-sm flex gap-2 items-center bg-white/20 rounded-lg py-2 px-4">
@@ -189,56 +67,192 @@ export default function Home() {
                       className="focus:outline-none text-xs font-medium grow text-black placeholder:text-[#D1D0D3]"
                       placeholder="Search Customer"
                     />
-                    <button className="font-semibold bg-primary py-2 px-4 rounded-lg">
+                    <button className="font-semibold bg-primary py-2 px-4 rounded-lg text-sm">
                       Search
                     </button>
                   </div>
-                  <button className="font-semibold text-sm flex gap-2 items-center bg-white/20 rounded-lg py-2 px-4">
+                  <button className="font-semibold text-sm flex gap-2 items-center bg-white/20 backdrop-blur-[10px] rounded-lg py-2 px-4">
                     <Filter size="16" variant="TwoTone" />
                     <span>Filter</span>
                   </button>
-                  <button className="font-semibold text-sm flex gap-2 items-center bg-white/20 rounded-lg py-2 px-4">
+                  <button className="font-semibold text-sm flex gap-2 items-center bg-white/20 backdrop-blur-[10px] rounded-lg py-2 px-4">
                     <Refresh size="16" variant="TwoTone" />
                     <span>Refresh</span>
                   </button>
-                  <button className="font-semibold text-sm flex gap-2 items-center bg-white/20 rounded-lg py-2 px-4">
+                  <button className="font-semibold text-sm flex gap-2 items-center bg-white/20 backdrop-blur-[10px] rounded-lg py-2 px-4">
                     <Printer size="16" variant="TwoTone" />
                   </button>
                 </div>
+                <div
+                  className="w-full h-full absolute left-0 top-0 -z-10 bg-primary"
+                  style={{
+                    WebkitClipPath: "polygon(0 0, 0 100%, 50% 100%, 60% 0%)",
+                  }}
+                ></div>
+                <div className="w-1/2 h-full absolute right-0 top-0 -z-20">
+                  <Image
+                    className="object-cover scale-180 object-[0%_40%] brightness-50"
+                    src={"/images/family.jpg"}
+                    fill
+                    alt="Family"
+                  />
+                </div>
               </div>
-              <div className="">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Customer Name</th>
-                      <th>Level</th>
-                      <th>Favorite Menu</th>
-                      <th>Total Transaction</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Odis Rhinehart</td>
-                      <td>Warga</td>
-                      <td>Chicken & Ribs Combo</td>
-                      <td>IDR 194,000</td>
-                      <td>Detail</td>
-                    </tr>
-                  </tbody>
-                </table>
+              <div className="flex flex-col gap-14">
+                <div className="rounded-sm overflow-hidden">
+                  <table className="w-full">
+                    <thead>
+                      <tr>
+                        <th>Customer Name</th>
+                        <th>Level</th>
+                        <th>Favorite Menu</th>
+                        <th>Total Transaction</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Odis Rhinehart</td>
+                        <td>
+                          <div className="py-3 px-6 bg-[#FEFBF6] rounded w-fit">
+                            <h1 className="bg-clip-text text-transparent bg-linear-to-r from-[#EEA849] to-[#F46B45]">
+                              Warga
+                            </h1>
+                          </div>
+                        </td>
+                        <td>Chicken & Ribs Combo</td>
+                        <td>IDR 194,000</td>
+                        <td>
+                          <div className="flex gap-1 justify-center">
+                            <button className="py-1 px-3 flex gap-2 items-center bg-neutral rounded-sm">
+                              <ShieldSearch size="12" variant="TwoTone" />
+                              <span>Detail</span>
+                            </button>
+                            <button className="py-1 px-3 flex gap-2 items-center bg-neutral rounded-sm">
+                              <Edit2 size="12" variant="TwoTone" />
+                            </button>
+                            <button className="py-1 px-3 flex gap-2 items-center bg-[#FEF5F6] text-error rounded-sm">
+                              <Trash size="12" variant="TwoTone" />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Odis Rhinehart</td>
+                        <td>
+                          <div className="py-3 px-6 bg-[#F6FCFE] rounded w-fit">
+                            <h1 className="bg-clip-text text-transparent bg-linear-to-r from-[#56CCF2] to-[#2F80ED]">
+                              Warga
+                            </h1>
+                          </div>
+                        </td>
+                        <td>Chicken & Ribs Combo</td>
+                        <td>IDR 194,000</td>
+                        <td>
+                          <div className="flex gap-1 justify-center">
+                            <button className="py-1 px-3 flex gap-2 items-center bg-neutral rounded-sm">
+                              <ShieldSearch size="12" variant="TwoTone" />
+                              <span>Detail</span>
+                            </button>
+                            <button className="py-1 px-3 flex gap-2 items-center bg-neutral rounded-sm">
+                              <Edit2 size="12" variant="TwoTone" />
+                            </button>
+                            <button className="py-1 px-3 flex gap-2 items-center bg-[#FEF5F6] text-error rounded-sm">
+                              <Trash size="12" variant="TwoTone" />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Odis Rhinehart</td>
+                        <td>
+                          <div className="py-3 px-6 bg-[#F6FCFE] rounded w-fit">
+                            <h1 className="bg-clip-text text-transparent bg-linear-to-r from-[#38EF7D] to-[#11998E]">
+                              Warga
+                            </h1>
+                          </div>
+                        </td>
+                        <td>Chicken & Ribs Combo</td>
+                        <td>IDR 194,000</td>
+                        <td>
+                          <div className="flex gap-1 justify-center">
+                            <button className="py-1 px-3 flex gap-2 items-center bg-neutral rounded-sm">
+                              <ShieldSearch size="12" variant="TwoTone" />
+                              <span>Detail</span>
+                            </button>
+                            <button className="py-1 px-3 flex gap-2 items-center bg-neutral rounded-sm">
+                              <Edit2 size="12" variant="TwoTone" />
+                            </button>
+                            <button className="py-1 px-3 flex gap-2 items-center bg-[#FEF5F6] text-error rounded-sm">
+                              <Trash size="12" variant="TwoTone" />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Odis Rhinehart</td>
+                        <td>
+                          <div className="py-3 px-6 bg-[#FEF5FF] rounded w-fit">
+                            <h1 className="bg-clip-text text-transparent bg-linear-to-r from-[#E100FF] to-[#7F00FF]">
+                              Warga
+                            </h1>
+                          </div>
+                        </td>
+                        <td>Chicken & Ribs Combo</td>
+                        <td>IDR 194,000</td>
+                        <td>
+                          <div className="flex gap-1 justify-center">
+                            <button className="py-1 px-3 flex gap-2 items-center bg-neutral rounded-sm">
+                              <ShieldSearch size="12" variant="TwoTone" />
+                              <span>Detail</span>
+                            </button>
+                            <button className="py-1 px-3 flex gap-2 items-center bg-neutral rounded-sm">
+                              <Edit2 size="12" variant="TwoTone" />
+                            </button>
+                            <button className="py-1 px-3 flex gap-2 items-center bg-[#FEF5F6] text-error rounded-sm">
+                              <Trash size="12" variant="TwoTone" />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div className="flex justify-between bg-neutral rounded-lg py-2 px-3">
+                  <div className="font-semibold text-muted">
+                    Showing 10 Data Customers
+                  </div>
+                  <div className="flex text-sm">
+                    <div className="py-2 px-4 font-bold bg-white shadow-[2px_2px_4px_0_#0000000D] rounded-sm">
+                      1
+                    </div>
+                    <div className="py-2 px-4 font-semibold text-muted">2</div>
+                    <div className="py-2 px-4 font-semibold text-muted">3</div>
+                    <div className="py-2 px-4 font-semibold text-muted">
+                      ...
+                    </div>
+                    <div className="py-2 px-4 font-semibold text-muted">38</div>
+                    <div className="py-2 px-4 font-semibold text-muted flex items-center gap-3">
+                      <span>Next</span>
+                      <ArrowRight size="16" />
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <div className="w-[227px] flex flex-col gap-4">
-              <div className="bg-primary rounded-xl p-4 text-white h-[265px] flex flex-col gap-4 justify-between">
+              <div className="bg-primary rounded-xl p-4 text-white h-[265px] flex flex-col gap-4 justify-between relative overflow-hidden -z-30">
                 <div className="font-semibold text-xl">
                   See analytics of <br />
                   the Customer <br />
                   Clearly
                 </div>
-                <button className="font-semibold text-sm flex gap-2 items-center bg-white/20 rounded-lg py-3 px-4 w-fit">
+                <button className="font-semibold text-sm flex gap-2 items-center bg-white/20 backdrop-blur-[10px] rounded-lg py-3 px-4 w-fit relative z-10">
                   See Analytics
                 </button>
+                <div className="size-[323px] absolute bg-[#5D5FEF] rounded-full border border-[#A5A6F6] top-[106px] left-[84px] -z-10"></div>
+                <div className="size-[323px] absolute bg-[#7879F1] rounded-full border border-[#FFFFFF] top-[136px] left-[126px] -z-10"></div>
+                <div className="size-[323px] absolute bg-[#A5A6F6] rounded-full border border-[#F2F2F2] top-[166px] left-[168px] -z-10"></div>
               </div>
               <div className="bg-neutral rounded-xl p-4 flex flex-col gap-3 h-[595px] relative overflow-hidden">
                 <div className="text-2xl">

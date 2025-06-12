@@ -10,7 +10,8 @@
   --color-secondary: #f17300;
   --color-muted: #98949e;
   --color-border: #d1d0d366;
-  --color-error: #8f0a13;
+  --color-error-dark: #8f0a13;
+  --color-error: #f02d3a;
   --color-error-light: #fef5f6;
   --color-neutral: #fafafa;
   --color-background: var(--background);
@@ -25,5 +26,21 @@
   }
 }
 
-body {
+tbody::before {
+  @apply content-["."] block h-[12px] text-transparent;
+}
+
+thead > tr {
+  @apply bg-neutral;
+}
+
+thead > tr > th {
+  @apply p-[10px] font-medium text-sm text-left text-muted;
+}
+
+tbody > tr {
+  @apply py-1;
+}
+tbody > tr > td {
+  @apply p-[10px] font-semibold text-sm;
 }
