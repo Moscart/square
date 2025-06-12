@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Add,
   ArrowRight,
@@ -11,8 +13,11 @@ import {
 } from "iconsax-reactjs";
 import Sidebar from "./_components/sidebar";
 import Image from "next/image";
+import { useAppSelector } from "@/lib/redux/hooks";
+import { LevelBadge } from "./_components/LevelBadge";
 
 export default function Home() {
+  const allCustomer = useAppSelector((state) => state.customer.items);
   return (
     <div className="lg:flex h-screen relative">
       <Sidebar />
@@ -115,110 +120,35 @@ export default function Home() {
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>Odis Rhinehart</td>
-                        <td>
-                          <div className="py-3 px-6 bg-[#FEFBF6] rounded w-fit">
-                            <h1 className="bg-clip-text text-transparent bg-linear-to-r from-[#EEA849] to-[#F46B45]">
-                              Warga
-                            </h1>
-                          </div>
-                        </td>
-                        <td>Chicken & Ribs Combo</td>
-                        <td>IDR 194,000</td>
-                        <td>
-                          <div className="flex gap-1 justify-center">
-                            <button className="py-1 px-3 flex gap-2 items-center bg-neutral rounded-sm">
-                              <ShieldSearch size="12" variant="TwoTone" />
-                              <span>Detail</span>
-                            </button>
-                            <button className="py-1 px-3 flex gap-2 items-center bg-neutral rounded-sm">
-                              <Edit2 size="12" variant="TwoTone" />
-                            </button>
-                            <button className="py-1 px-3 flex gap-2 items-center bg-[#FEF5F6] text-error rounded-sm">
-                              <Trash size="12" variant="TwoTone" />
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Odis Rhinehart</td>
-                        <td>
-                          <div className="py-3 px-6 bg-[#F6FCFE] rounded w-fit">
-                            <h1 className="bg-clip-text text-transparent bg-linear-to-r from-[#56CCF2] to-[#2F80ED]">
-                              Warga
-                            </h1>
-                          </div>
-                        </td>
-                        <td>Chicken & Ribs Combo</td>
-                        <td>IDR 194,000</td>
-                        <td>
-                          <div className="flex gap-1 justify-center">
-                            <button className="py-1 px-3 flex gap-2 items-center bg-neutral rounded-sm">
-                              <ShieldSearch size="12" variant="TwoTone" />
-                              <span>Detail</span>
-                            </button>
-                            <button className="py-1 px-3 flex gap-2 items-center bg-neutral rounded-sm">
-                              <Edit2 size="12" variant="TwoTone" />
-                            </button>
-                            <button className="py-1 px-3 flex gap-2 items-center bg-[#FEF5F6] text-error rounded-sm">
-                              <Trash size="12" variant="TwoTone" />
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Odis Rhinehart</td>
-                        <td>
-                          <div className="py-3 px-6 bg-[#F6FCFE] rounded w-fit">
-                            <h1 className="bg-clip-text text-transparent bg-linear-to-r from-[#38EF7D] to-[#11998E]">
-                              Warga
-                            </h1>
-                          </div>
-                        </td>
-                        <td>Chicken & Ribs Combo</td>
-                        <td>IDR 194,000</td>
-                        <td>
-                          <div className="flex gap-1 justify-center">
-                            <button className="py-1 px-3 flex gap-2 items-center bg-neutral rounded-sm">
-                              <ShieldSearch size="12" variant="TwoTone" />
-                              <span>Detail</span>
-                            </button>
-                            <button className="py-1 px-3 flex gap-2 items-center bg-neutral rounded-sm">
-                              <Edit2 size="12" variant="TwoTone" />
-                            </button>
-                            <button className="py-1 px-3 flex gap-2 items-center bg-[#FEF5F6] text-error rounded-sm">
-                              <Trash size="12" variant="TwoTone" />
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Odis Rhinehart</td>
-                        <td>
-                          <div className="py-3 px-6 bg-[#FEF5FF] rounded w-fit">
-                            <h1 className="bg-clip-text text-transparent bg-linear-to-r from-[#E100FF] to-[#7F00FF]">
-                              Warga
-                            </h1>
-                          </div>
-                        </td>
-                        <td>Chicken & Ribs Combo</td>
-                        <td>IDR 194,000</td>
-                        <td>
-                          <div className="flex gap-1 justify-center">
-                            <button className="py-1 px-3 flex gap-2 items-center bg-neutral rounded-sm">
-                              <ShieldSearch size="12" variant="TwoTone" />
-                              <span>Detail</span>
-                            </button>
-                            <button className="py-1 px-3 flex gap-2 items-center bg-neutral rounded-sm">
-                              <Edit2 size="12" variant="TwoTone" />
-                            </button>
-                            <button className="py-1 px-3 flex gap-2 items-center bg-[#FEF5F6] text-error rounded-sm">
-                              <Trash size="12" variant="TwoTone" />
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
+                      {allCustomer.map((customer) => (
+                        <tr key={customer.id}>
+                          <td>{customer.name}</td>
+                          <td>
+                            <LevelBadge variant={customer.level} />
+                          </td>
+                          <td>{customer.favorite_menu}</td>
+                          <td>
+                            IDR{" "}
+                            {new Intl.NumberFormat().format(
+                              customer.total_transaction
+                            )}
+                          </td>
+                          <td>
+                            <div className="flex gap-1 justify-center">
+                              <button className="py-1 px-3 flex gap-2 items-center bg-neutral rounded-sm">
+                                <ShieldSearch size="12" variant="TwoTone" />
+                                <span>Detail</span>
+                              </button>
+                              <button className="py-1 px-3 flex gap-2 items-center bg-neutral rounded-sm">
+                                <Edit2 size="12" variant="TwoTone" />
+                              </button>
+                              <button className="py-1 px-3 flex gap-2 items-center bg-[#FEF5F6] text-error rounded-sm">
+                                <Trash size="12" variant="TwoTone" />
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
                     </tbody>
                   </table>
                 </div>
