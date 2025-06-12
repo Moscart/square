@@ -11,13 +11,43 @@ import {
   ShieldSearch,
   Trash,
 } from "iconsax-reactjs";
-import Sidebar from "./_components/sidebar";
+import Sidebar from "./_components/Sidebars";
 import Image from "next/image";
 import { useAppSelector } from "@/lib/redux/hooks";
 import { LevelBadge } from "./_components/LevelBadge";
+import { useState } from "react";
+import PaginationControl from "./_components/PaginationControl";
 
 export default function Home() {
   const allCustomer = useAppSelector((state) => state.customer.items);
+  const [searchCustomer, setSearchCustomer] = useState("");
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const itemsPerPage = 10;
+
+  const filteredItems = allCustomer.filter((customer) =>
+    customer.name.toLowerCase().includes(searchCustomer.toLowerCase())
+  );
+
+  const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
+
+  const pageItems = filteredItems.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
+  const handleSearchChange = (search: string) => {
+    setCurrentPage(1);
+    setSearchCustomer(search);
+  };
+
+  const handlePageChange = (newPage: number) => {
+    if (newPage < 1 || newPage > totalPages) return;
+    setCurrentPage(newPage);
+  };
+
+  const numberFormat = (value: number) =>
+    new Intl.NumberFormat("id-ID").format(value);
+
   return (
     <div className="lg:flex h-screen relative">
       <Sidebar />
@@ -72,6 +102,8 @@ export default function Home() {
                         type="text"
                         className="focus:outline-none text-xs font-medium grow text-black placeholder:text-[#D1D0D3]"
                         placeholder="Search Customer"
+                        value={searchCustomer}
+                        onChange={(e) => handleSearchChange(e.target.value)}
                       />
                       <button className="font-semibold bg-primary py-2 px-4 rounded-lg text-sm">
                         Search
@@ -120,58 +152,49 @@ export default function Home() {
                       </tr>
                     </thead>
                     <tbody>
-                      {allCustomer.map((customer) => (
-                        <tr key={customer.id}>
-                          <td>{customer.name}</td>
-                          <td>
-                            <LevelBadge variant={customer.level} />
-                          </td>
-                          <td>{customer.favorite_menu}</td>
-                          <td>
-                            IDR{" "}
-                            {new Intl.NumberFormat().format(
-                              customer.total_transaction
-                            )}
-                          </td>
-                          <td>
-                            <div className="flex gap-1 justify-center">
-                              <button className="py-1 px-3 flex gap-2 items-center bg-neutral rounded-sm">
-                                <ShieldSearch size="12" variant="TwoTone" />
-                                <span>Detail</span>
-                              </button>
-                              <button className="py-1 px-3 flex gap-2 items-center bg-neutral rounded-sm">
-                                <Edit2 size="12" variant="TwoTone" />
-                              </button>
-                              <button className="py-1 px-3 flex gap-2 items-center bg-[#FEF5F6] text-error rounded-sm">
-                                <Trash size="12" variant="TwoTone" />
-                              </button>
-                            </div>
+                      {pageItems.length ? (
+                        pageItems.map((customer) => (
+                          <tr key={customer.id}>
+                            <td>{customer.name}</td>
+                            <td>
+                              <LevelBadge variant={customer.level} />
+                            </td>
+                            <td>{customer.favorite_menu}</td>
+                            <td>
+                              IDR {numberFormat(customer.total_transaction)}
+                            </td>
+                            <td>
+                              <div className="flex gap-1 justify-center">
+                                <button className="py-1 px-3 flex gap-2 items-center bg-neutral rounded-sm">
+                                  <ShieldSearch size="12" variant="TwoTone" />
+                                  <span>Detail</span>
+                                </button>
+                                <button className="py-1 px-3 flex gap-2 items-center bg-neutral rounded-sm">
+                                  <Edit2 size="12" variant="TwoTone" />
+                                </button>
+                                <button className="py-1 px-3 flex gap-2 items-center bg-[#FEF5F6] text-error rounded-sm">
+                                  <Trash size="12" variant="TwoTone" />
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                        ))
+                      ) : (
+                        <tr>
+                          <td colSpan={5} className="text-center">
+                            No Data
                           </td>
                         </tr>
-                      ))}
+                      )}
                     </tbody>
                   </table>
                 </div>
-                <div className="max-sm:flex-col flex gap-4 items-center justify-between bg-neutral rounded-lg py-2 px-3">
-                  <div className="max-sm:text-sm font-semibold text-muted">
-                    Showing 10 Data Customers
-                  </div>
-                  <div className="flex text-sm">
-                    <div className="py-2 px-4 font-bold bg-white shadow-[2px_2px_4px_0_#0000000D] rounded-sm">
-                      1
-                    </div>
-                    <div className="py-2 px-4 font-semibold text-muted">2</div>
-                    <div className="py-2 px-4 font-semibold text-muted">3</div>
-                    <div className="py-2 px-4 font-semibold text-muted">
-                      ...
-                    </div>
-                    <div className="py-2 px-4 font-semibold text-muted">38</div>
-                    <div className="py-2 px-4 font-semibold text-muted flex items-center gap-3">
-                      <span>Next</span>
-                      <ArrowRight size="16" />
-                    </div>
-                  </div>
-                </div>
+                <PaginationControl
+                  totalItems={pageItems.length}
+                  currentPage={currentPage}
+                  handlePageChange={handlePageChange}
+                  totalPages={totalPages}
+                />
               </div>
             </div>
             <div className="xl:w-[227px] max-xl:grid max-md:flex max-xl:grid-cols-5 flex flex-col gap-4">
