@@ -14,10 +14,10 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="flex h-screen">
+    <div className="lg:flex h-screen relative">
       <Sidebar />
       {/* Main Content */}
-      <main className="flex-1 p-6 h-full overflow-y-auto">
+      <main className="flex-1 p-6 h-full overflow-y-auto max-lg:pt-[92px]">
         <div className="flex flex-col gap-4 max-w-6xl mx-auto">
           <div className="grid xl:grid-cols-2 border-b border-border">
             <div className="">
