@@ -41,7 +41,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="flex gap-4">
+          <div className="max-xl:grid flex gap-4">
             <div className="grow flex flex-col gap-6">
               <div className=" p-3 rounded-lg text-white flex flex-col gap-4 relative overflow-hidden">
                 <div className="max-w-[341px] flex flex-col gap-1">
@@ -51,37 +51,41 @@ export default function Home() {
                     delete the customer. Also you can manage it easily.
                   </div>
                 </div>
-                <div className="flex gap-4">
-                  <button className="font-semibold text-sm flex gap-2 items-center bg-white/20 rounded-lg py-2 px-4">
-                    <Add size="16" />
-                    <span>Add New Customer</span>
-                  </button>
-                  <div className="bg-white w-fit rounded-lg flex gap-4 items-center p-1 ps-4 grow">
-                    <SearchNormal1
-                      size="16"
-                      variant="TwoTone"
-                      className="text-[#D1D0D3]"
-                    />
-                    <input
-                      type="text"
-                      className="focus:outline-none text-xs font-medium grow text-black placeholder:text-[#D1D0D3]"
-                      placeholder="Search Customer"
-                    />
-                    <button className="font-semibold bg-primary py-2 px-4 rounded-lg text-sm">
-                      Search
+                <div className="max-lg:grid flex gap-4">
+                  <div className="flex gap-4 grow">
+                    <button className="font-semibold text-sm flex gap-2 items-center bg-white/20 rounded-lg py-2 px-4">
+                      <Add size="16" />
+                      <span className="line-clamp-1">Add New Customer</span>
+                    </button>
+                    <div className="bg-white w-fit rounded-lg flex gap-4 items-center p-1 ps-4 grow">
+                      <SearchNormal1
+                        size="16"
+                        variant="TwoTone"
+                        className="text-[#D1D0D3]"
+                      />
+                      <input
+                        type="text"
+                        className="focus:outline-none text-xs font-medium grow text-black placeholder:text-[#D1D0D3]"
+                        placeholder="Search Customer"
+                      />
+                      <button className="font-semibold bg-primary py-2 px-4 rounded-lg text-sm">
+                        Search
+                      </button>
+                    </div>
+                  </div>
+                  <div className="flex gap-4">
+                    <button className="font-semibold text-sm flex gap-2 items-center bg-white/20 backdrop-blur-[10px] rounded-lg py-2 px-4">
+                      <Filter size="16" variant="TwoTone" />
+                      <span>Filter</span>
+                    </button>
+                    <button className="font-semibold text-sm flex gap-2 items-center bg-white/20 backdrop-blur-[10px] rounded-lg py-2 px-4">
+                      <Refresh size="16" variant="TwoTone" />
+                      <span>Refresh</span>
+                    </button>
+                    <button className="font-semibold text-sm flex gap-2 items-center bg-white/20 backdrop-blur-[10px] rounded-lg py-2 px-4">
+                      <Printer size="16" variant="TwoTone" />
                     </button>
                   </div>
-                  <button className="font-semibold text-sm flex gap-2 items-center bg-white/20 backdrop-blur-[10px] rounded-lg py-2 px-4">
-                    <Filter size="16" variant="TwoTone" />
-                    <span>Filter</span>
-                  </button>
-                  <button className="font-semibold text-sm flex gap-2 items-center bg-white/20 backdrop-blur-[10px] rounded-lg py-2 px-4">
-                    <Refresh size="16" variant="TwoTone" />
-                    <span>Refresh</span>
-                  </button>
-                  <button className="font-semibold text-sm flex gap-2 items-center bg-white/20 backdrop-blur-[10px] rounded-lg py-2 px-4">
-                    <Printer size="16" variant="TwoTone" />
-                  </button>
                 </div>
                 <div
                   className="w-full h-full absolute left-0 top-0 -z-10 bg-primary"
@@ -99,7 +103,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="flex flex-col gap-14">
-                <div className="rounded-sm overflow-hidden">
+                <div className="rounded-sm overflow-hidden overflow-x-auto">
                   <table className="w-full">
                     <thead>
                       <tr>
@@ -218,7 +222,7 @@ export default function Home() {
                     </tbody>
                   </table>
                 </div>
-                <div className="flex justify-between bg-neutral rounded-lg py-2 px-3">
+                <div className="flex items-center justify-between bg-neutral rounded-lg py-2 px-3">
                   <div className="font-semibold text-muted">
                     Showing 10 Data Customers
                   </div>
@@ -240,8 +244,8 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="w-[227px] flex flex-col gap-4">
-              <div className="bg-primary rounded-xl p-4 text-white h-[265px] flex flex-col gap-4 justify-between relative overflow-hidden -z-30">
+            <div className="xl:w-[227px] max-xl:grid max-md:flex max-xl:grid-cols-5 flex flex-col gap-4">
+              <div className="max-xl:col-span-2 bg-primary rounded-xl p-4 text-white max-md:h-auto h-[265px] flex flex-col gap-4 justify-between relative overflow-hidden -z-30">
                 <div className="font-semibold text-xl">
                   See analytics of <br />
                   the Customer <br />
@@ -250,19 +254,22 @@ export default function Home() {
                 <button className="font-semibold text-sm flex gap-2 items-center bg-white/20 backdrop-blur-[10px] rounded-lg py-3 px-4 w-fit relative z-10">
                   See Analytics
                 </button>
-                <div className="size-[323px] absolute bg-[#5D5FEF] rounded-full border border-[#A5A6F6] top-[106px] left-[84px] -z-10"></div>
-                <div className="size-[323px] absolute bg-[#7879F1] rounded-full border border-[#FFFFFF] top-[136px] left-[126px] -z-10"></div>
-                <div className="size-[323px] absolute bg-[#A5A6F6] rounded-full border border-[#F2F2F2] top-[166px] left-[168px] -z-10"></div>
+                {/* <div className="size-[323px] absolute bg-[#5D5FEF] rounded-full border border-[#A5A6F6] top-[106px] left-[84px] -z-10"></div> */}
+                <div className="size-[323px] absolute bg-[#5D5FEF] rounded-full border border-[#A5A6F6] bottom-[160px] translate-y-full right-[144px] translate-x-full -z-10"></div>
+                <div className="size-[323px] absolute bg-[#7879F1] rounded-full border border-[#FFFFFF] bottom-[130px] translate-y-full right-[98px] translate-x-full -z-10"></div>
+                <div className="size-[323px] absolute bg-[#A5A6F6] rounded-full border border-[#F2F2F2] bottom-[100px] translate-y-full right-[56px] translate-x-full -z-10"></div>
               </div>
-              <div className="bg-neutral rounded-xl p-4 flex flex-col gap-3 h-[595px] relative overflow-hidden">
-                <div className="text-2xl">
-                  <div className="font-medium">Top Menu</div>
-                  <div className="font-bold text-secondary">This Week</div>
+              <div className="max-xl:col-span-3 bg-neutral rounded-xl p-4 max-xl:grid max-xl:grid-cols-3 flex flex-col gap-3 max-xl:h-auto h-[595px] relative overflow-hidden">
+                <div className="flex flex-col gap-3">
+                  <div className="text-2xl">
+                    <div className="font-medium">Top Menu</div>
+                    <div className="font-bold text-secondary">This Week</div>
+                  </div>
+                  <div className="font-satoshi font-medium text-xs text-muted">
+                    10 - 12 Agustus 2023
+                  </div>
                 </div>
-                <div className="font-satoshi font-medium text-xs text-muted">
-                  10 - 12 Agustus 2023
-                </div>
-                <div className="flex flex-col gap-2">
+                <div className="max-xl:col-span-2 flex flex-col gap-2">
                   <div className="bg-white font-bold text-sm p-[10px] rounded-xl shadow-[4px_4px_10px_0px_#0000000D] relative">
                     <span>Nasi Goreng Jamur Special Resto Pak Min</span>
                     <div className="absolute text-white bg-secondary size-6 flex items-center justify-center rotate-8 -top-2 right-0.5 shadow-[2px_2px_0px_0px_#464646]">
@@ -282,33 +289,14 @@ export default function Home() {
                     5. Nasi Goreng Seafood
                   </div>
                 </div>
-                <div className="absolute bottom-0 left-0">
-                  <svg
-                    width="227"
-                    height="228"
-                    viewBox="0 0 227 228"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M-2.94362 150.026L-5.91148 152.676L-5.91148 229.709L233.741 229.709L233.741 1.00004L232.249 13.6106C230.757 26.2211 227.772 51.4421 220.83 49.9454C213.887 48.4487 202.985 20.2343 196.822 23.997C190.658 27.7597 189.232 63.4994 185.127 81.1592C181.023 98.819 174.239 98.3989 165.562 85.1992C156.885 71.9995 146.315 46.0203 138.513 38.7263C130.712 31.4322 125.678 42.8232 120.56 53.644C115.442 64.4647 110.24 74.7153 103.722 76.0856C97.2035 77.4559 89.3697 69.9461 84.5656 82.8855C79.7616 95.8249 77.9873 129.214 73.164 142.023C68.3407 154.833 60.4684 147.063 53.9485 148.421C47.4285 149.779 42.2609 160.265 35.4775 159.845C28.6941 159.425 20.2949 148.098 13.1274 145.086C5.95994 142.074 0.0242315 147.375 -2.94362 150.026Z"
-                      fill="url(#paint0_linear_1_565)"
-                      stroke="#F17300"
-                    />
-                    <defs>
-                      <linearGradient
-                        id="paint0_linear_1_565"
-                        x1="97"
-                        y1="-309.5"
-                        x2="97"
-                        y2="180"
-                        gradientUnits="userSpaceOnUse"
-                      >
-                        <stop stopColor="#F17300" />
-                        <stop offset="1" stopColor="#F17300" stopOpacity="0" />
-                      </linearGradient>
-                    </defs>
-                  </svg>
+                <div className="absolute bottom-0 left-0 max-xl:w-full">
+                  <Image
+                    className="object-cover max-xl:w-1/3"
+                    src={"/images/graph.png"}
+                    width={1000}
+                    height={1000}
+                    alt="Graph"
+                  />
                 </div>
               </div>
             </div>

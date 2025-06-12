@@ -16,7 +16,7 @@ import Image from "next/image";
 
 export default function Sidebar() {
   return (
-    <aside className="w-[200px] flex flex-col justify-between border-r border-border bg-white">
+    <aside className="max-lg:hidden w-[200px] flex flex-col justify-between border-r border-border bg-white">
       <nav className="overflow-y-auto [&::-webkit-scrollbar]:hidden">
         <div className="p-6">
           <div className="flex items-center gap-1">
