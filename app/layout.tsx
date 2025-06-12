@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Quicksand } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
+import ReduxProvider from "./ReduxProvider";
 
 const quicksand = Quicksand({
   variable: "--font-quicksand",
@@ -28,7 +29,7 @@ export default function RootLayout({
       <body
         className={`${quicksand.className} ${satoshiVariable.variable} antialiased`}
       >
-        {children}
+        <ReduxProvider>{children}</ReduxProvider>
       </body>
     </html>
   );
