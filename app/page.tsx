@@ -24,6 +24,7 @@ import {
   deleteCustomer,
 } from "@/lib/redux/features/customer/customerSlice";
 import { useDispatch } from "react-redux";
+import TableHead from "./_components/TableHead";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -216,130 +217,40 @@ export default function Home() {
                     <thead>
                       <tr>
                         <th>
-                          <button
-                            className="flex items-center justify-between gap-4 w-full cursor-pointer"
-                            onClick={() => handleSort("name")}
-                          >
-                            <span>Customer Name</span>
-                            {sortBy === "name" && order === "asc" && (
-                              <ArrowUp2 size={16} variant="Bold" />
-                            )}
-                            {sortBy === "name" && order === "desc" && (
-                              <ArrowDown2 size={16} variant="Bold" />
-                            )}
-                            {sortBy !== "name" && (
-                              <svg
-                                width="7"
-                                height="12"
-                                viewBox="0 0 7 12"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path
-                                  d="M0.900009 8L3.40001 10.5L5.90001 8M0.900009 4L3.40001 1.5L5.90001 4"
-                                  stroke="#98949E"
-                                  strokeWidth="1.5"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                />
-                              </svg>
-                            )}
-                          </button>
+                          <TableHead
+                            handleSort={handleSort}
+                            label="Customer Name"
+                            name="name"
+                            order={order}
+                            sortBy={sortBy}
+                          />
                         </th>
                         <th>
-                          <button
-                            className="flex items-center justify-between gap-4 w-full cursor-pointer"
-                            onClick={() => handleSort("level")}
-                          >
-                            <span>Level</span>
-                            {sortBy === "level" && order === "asc" && (
-                              <ArrowUp2 size={16} variant="Bold" />
-                            )}
-                            {sortBy === "level" && order === "desc" && (
-                              <ArrowDown2 size={16} variant="Bold" />
-                            )}
-                            {sortBy !== "level" && (
-                              <svg
-                                width="7"
-                                height="12"
-                                viewBox="0 0 7 12"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path
-                                  d="M0.900009 8L3.40001 10.5L5.90001 8M0.900009 4L3.40001 1.5L5.90001 4"
-                                  stroke="#98949E"
-                                  strokeWidth="1.5"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                />
-                              </svg>
-                            )}
-                          </button>
+                          <TableHead
+                            handleSort={handleSort}
+                            label="Level"
+                            name="level"
+                            order={order}
+                            sortBy={sortBy}
+                          />
                         </th>
                         <th>
-                          <button
-                            className="flex items-center justify-between gap-4 w-full cursor-pointer"
-                            onClick={() => handleSort("favorite_menu")}
-                          >
-                            <span>Favorite Menu</span>
-                            {sortBy === "favorite_menu" && order === "asc" && (
-                              <ArrowUp2 size={16} variant="Bold" />
-                            )}
-                            {sortBy === "favorite_menu" && order === "desc" && (
-                              <ArrowDown2 size={16} variant="Bold" />
-                            )}
-                            {sortBy !== "favorite_menu" && (
-                              <svg
-                                width="7"
-                                height="12"
-                                viewBox="0 0 7 12"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path
-                                  d="M0.900009 8L3.40001 10.5L5.90001 8M0.900009 4L3.40001 1.5L5.90001 4"
-                                  stroke="#98949E"
-                                  strokeWidth="1.5"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                />
-                              </svg>
-                            )}
-                          </button>
+                          <TableHead
+                            handleSort={handleSort}
+                            label="Favorite Menu"
+                            name="favorite_menu"
+                            order={order}
+                            sortBy={sortBy}
+                          />
                         </th>
                         <th>
-                          <button
-                            className="flex items-center justify-between gap-4 w-full cursor-pointer"
-                            onClick={() => handleSort("total_transaction")}
-                          >
-                            <span>Total Transaction</span>
-                            {sortBy === "total_transaction" &&
-                              order === "asc" && (
-                                <ArrowUp2 size={16} variant="Bold" />
-                              )}
-                            {sortBy === "total_transaction" &&
-                              order === "desc" && (
-                                <ArrowDown2 size={16} variant="Bold" />
-                              )}
-                            {sortBy !== "total_transaction" && (
-                              <svg
-                                width="7"
-                                height="12"
-                                viewBox="0 0 7 12"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path
-                                  d="M0.900009 8L3.40001 10.5L5.90001 8M0.900009 4L3.40001 1.5L5.90001 4"
-                                  stroke="#98949E"
-                                  strokeWidth="1.5"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                />
-                              </svg>
-                            )}
-                          </button>
+                          <TableHead
+                            handleSort={handleSort}
+                            label="Total Transaction"
+                            name="total_transaction"
+                            order={order}
+                            sortBy={sortBy}
+                          />
                         </th>
                         <th>Action</th>
                       </tr>
