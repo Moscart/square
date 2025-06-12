@@ -16,17 +16,30 @@ import Sidebar from "./_components/Sidebars";
 import Image from "next/image";
 import { useAppSelector } from "@/lib/redux/hooks";
 import { LevelBadge } from "./_components/LevelBadge";
-import { useState } from "react";
+import { ChangeEvent, FormEvent, useRef, useState } from "react";
 import PaginationControl from "./_components/PaginationControl";
-import { CustomerItem } from "@/lib/redux/features/customer/customerSlice";
+import {
+  addCustomer,
+  CustomerItem,
+} from "@/lib/redux/features/customer/customerSlice";
+import { useDispatch } from "react-redux";
 
 export default function Home() {
+  const dispatch = useDispatch();
   const allCustomer = useAppSelector((state) => state.customer.items);
+  const initialData: CustomerItem = {
+    name: "",
+    favorite_menu: "",
+    level: "warga",
+    total_transaction: 0,
+  };
+  const [formData, setFormData] = useState<CustomerItem>(initialData);
   const [searchCustomer, setSearchCustomer] = useState("");
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [sortBy, setSortBy] = useState<string>("");
   const [order, setOrder] = useState("asc");
   const itemsPerPage = 10;
+  const modalToggleRef = useRef<HTMLInputElement>(null);
 
   const filteredItems = allCustomer.filter((customer) =>
     customer.name.toLowerCase().includes(searchCustomer.toLowerCase())
@@ -78,6 +91,22 @@ export default function Home() {
     }
   };
 
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    dispatch(addCustomer(formData));
+    if (modalToggleRef.current) {
+      modalToggleRef.current.checked = false;
+    }
+    setFormData(initialData);
+  };
+
   const numberFormat = (value: number) =>
     new Intl.NumberFormat("id-ID").format(value);
 
@@ -121,10 +150,13 @@ export default function Home() {
                 </div>
                 <div className="max-lg:grid flex gap-4">
                   <div className="max-md:grid flex gap-4 grow">
-                    <button className="font-semibold w-fit text-sm flex gap-2 items-center bg-white/20 backdrop-blur-[10px] rounded-lg py-2 px-4">
+                    <label
+                      htmlFor="modal-toggle"
+                      className="font-semibold w-fit text-sm flex gap-2 items-center bg-white/20 backdrop-blur-[10px] rounded-lg py-2 px-4 cursor-pointer"
+                    >
                       <Add size="16" />
                       <span className="line-clamp-1">Add New Customer</span>
-                    </button>
+                    </label>
                     <div className="bg-white w-fit rounded-lg flex gap-4 items-center p-1 ps-4 grow">
                       <SearchNormal1
                         size="16"
@@ -406,6 +438,122 @@ export default function Home() {
                     alt="Graph"
                   />
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="">
+          <input
+            type="checkbox"
+            id="modal-toggle"
+            className="peer hidden"
+            ref={modalToggleRef}
+          />
+
+          <label
+            htmlFor="modal-toggle"
+            className="fixed inset-0 bg-black/40 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-200 peer-checked:opacity-100 peer-checked:pointer-events-auto z-10"
+          />
+
+          <div className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-full max-w-xl flex items-center justify-center p-4 pointer-events-none peer-checked:pointer-events-auto opacity-0 peer-checked:opacity-100 transition-all duration-200 transform scale-95 peer-checked:scale-100 z-20">
+            <div className="bg-white rounded-lg shadow-xl w-full mx-auto overflow-hidden">
+              <header className="flex justify-between items-center px-6 py-4 border-b-2 border-border">
+                <h2 className="text-xl font-semibold">Add Customer</h2>
+                <label
+                  htmlFor="modal-toggle"
+                  className="text-2xl leading-none cursor-pointer hover:text-red-500 transition"
+                >
+                  &times;
+                </label>
+              </header>
+
+              <div className="p-6 space-y-4">
+                <form
+                  className="space-y-4 [&:container(width>400px)]:grid [&:container(width>400px)]:grid-cols-2 gap-4"
+                  onSubmit={handleSubmit}
+                >
+                  <div>
+                    <label
+                      className="block text-sm font-medium mb-1"
+                      htmlFor="name"
+                    >
+                      Name
+                    </label>
+                    <input
+                      name="name"
+                      id="name"
+                      type="text"
+                      className="text-xs font-medium w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
+                      required
+                      value={formData.name}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div>
+                    <label
+                      className="block text-sm font-medium mb-1"
+                      htmlFor="level"
+                    >
+                      Level
+                    </label>
+                    <select
+                      name="level"
+                      id="level"
+                      className="text-xs font-medium w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
+                      required
+                      value={formData.level}
+                      onChange={handleChange}
+                    >
+                      <option value="warga">Warga</option>
+                      <option value="juragan">Juragan</option>
+                      <option value="sultan">Sultan</option>
+                      <option value="konglomerat">Konglomerat</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label
+                      className="block text-sm font-medium mb-1"
+                      htmlFor="favorite_menu"
+                    >
+                      Favorite Menu
+                    </label>
+                    <input
+                      name="favorite_menu"
+                      id="favorite_menu"
+                      type="text"
+                      className="text-xs font-medium w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
+                      required
+                      value={formData.favorite_menu}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div>
+                    <label
+                      className="block text-sm font-medium mb-1"
+                      htmlFor="total_transaction"
+                    >
+                      Total Transaction
+                    </label>
+                    <input
+                      name="total_transaction"
+                      id="total_transaction"
+                      type="number"
+                      className="text-xs font-medium w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
+                      required
+                      value={formData.total_transaction}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="col-span-2 flex justify-end">
+                    <button
+                      type="submit"
+                      className="font-semibold text-sm px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/80 cursor-pointer transition"
+                    >
+                      Submit
+                    </button>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
