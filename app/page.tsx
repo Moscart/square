@@ -9,7 +9,6 @@ import PaginationControl from "./_components/PaginationControl";
 import {
   addCustomer,
   CustomerItem,
-  deleteCustomer,
 } from "@/lib/redux/features/customer/customerSlice";
 import { useDispatch } from "react-redux";
 import CustomerTable from "./_components/CustomerTable";
@@ -98,13 +97,6 @@ export default function Home() {
     }
     setFormData(initialData);
   };
-
-  const handleDelete = (id: string) => {
-    dispatch(deleteCustomer(id));
-  };
-
-  const numberFormat = (value: number) =>
-    new Intl.NumberFormat("id-ID").format(value);
 
   return (
     <div className="lg:flex h-screen relative">
@@ -206,8 +198,6 @@ export default function Home() {
                   order={order}
                   sortBy={sortBy}
                   handleSort={handleSort}
-                  handleDelete={handleDelete}
-                  numberFormat={numberFormat}
                 />
                 <PaginationControl
                   totalItems={pageItems.length}
