@@ -10,12 +10,27 @@ export default function ConfirmDeleteModal({
   onClose,
   onConfirm,
   customerName,
-}: ConfirmDeleteModalProps) {
-  if (!open) return null;
-
+}: Readonly<ConfirmDeleteModalProps>) {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-      <div className="bg-white rounded-lg shadow-lg p-6 m-6 w-full max-w-lg">
+    <div
+      className={`
+        fixed inset-0 z-50 flex items-center justify-center
+        bg-black/40 backdrop-blur-[10px]
+        transition-opacity duration-300
+        ${
+          open
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
+        }
+      `}
+    >
+      <div
+        className={`
+          bg-white rounded-lg shadow-lg p-6 m-6 w-full max-w-lg
+          transition-all duration-300
+          ${open ? "scale-100" : "scale-95"}
+        `}
+      >
         <div className="font-bold text-lg mb-2">Delete Customer</div>
         <div className="mb-4 text-sm">
           Are you sure you want to delete{" "}

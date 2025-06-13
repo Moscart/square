@@ -18,7 +18,7 @@ export default function AddCustomerModal({
   formData,
   onChange,
   onSubmit,
-}: AddCustomerModalProps) {
+}: Readonly<AddCustomerModalProps>) {
   return (
     <div>
       <input

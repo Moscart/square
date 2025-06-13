@@ -21,7 +21,7 @@ export default function CustomerTable({
   handleSort,
   handleDelete,
   numberFormat,
-}: CustomerTableProps) {
+}: Readonly<CustomerTableProps>) {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [selectedCustomer, setSelectedCustomer] = useState<{
     id: string;
