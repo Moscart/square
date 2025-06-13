@@ -2,6 +2,8 @@ import { ShieldSearch, Edit2, Trash } from "iconsax-reactjs";
 import { LevelBadge } from "./LevelBadge";
 import TableHead from "./TableHead";
 import { CustomerItem } from "@/lib/redux/features/customer/customerSlice";
+import ConfirmDeleteModal from "./ConfirmDeleteModal";
+import { useState } from "react";
 
 interface CustomerTableProps {
   items: CustomerItem[];
@@ -20,6 +22,28 @@ export default function CustomerTable({
   handleDelete,
   numberFormat,
 }: CustomerTableProps) {
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [selectedCustomer, setSelectedCustomer] = useState<{
+    id: string;
+    name: string;
+  } | null>(null);
+
+  const openDeleteModal = (customer: { id: string; name: string }) => {
+    setSelectedCustomer(customer);
+    setDeleteModalOpen(true);
+  };
+
+  const closeDeleteModal = () => {
+    setDeleteModalOpen(false);
+    setSelectedCustomer(null);
+  };
+
+  const confirmDelete = () => {
+    if (selectedCustomer) {
+      handleDelete(selectedCustomer.id);
+      closeDeleteModal();
+    }
+  };
   return (
     <div className="rounded-sm overflow-hidden overflow-x-auto">
       <table className="min-w-fit w-full whitespace-nowrap">
@@ -85,7 +109,12 @@ export default function CustomerTable({
                     </button>
                     <button
                       className="py-1 px-3 flex gap-2 items-center bg-[#FEF5F6] text-error rounded-sm"
-                      onClick={() => handleDelete(customer.id)}
+                      onClick={() =>
+                        openDeleteModal({
+                          id: customer.id,
+                          name: customer.name,
+                        })
+                      }
                     >
                       <Trash size="12" variant="TwoTone" />
                     </button>
@@ -102,6 +131,12 @@ export default function CustomerTable({
           )}
         </tbody>
       </table>
+      <ConfirmDeleteModal
+        open={deleteModalOpen}
+        onClose={closeDeleteModal}
+        onConfirm={confirmDelete}
+        customerName={selectedCustomer?.name}
+      />
     </div>
   );
 }

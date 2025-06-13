@@ -1,19 +1,9 @@
 "use client";
 
-import {
-  Add,
-  Edit2,
-  Filter,
-  Printer,
-  Refresh,
-  SearchNormal1,
-  ShieldSearch,
-  Trash,
-} from "iconsax-reactjs";
+import { Add, Filter, Printer, Refresh, SearchNormal1 } from "iconsax-reactjs";
 import Sidebar from "./_components/Sidebar";
 import Image from "next/image";
 import { useAppSelector } from "@/lib/redux/hooks";
-import { LevelBadge } from "./_components/LevelBadge";
 import { ChangeEvent, FormEvent, useRef, useState } from "react";
 import PaginationControl from "./_components/PaginationControl";
 import {
@@ -22,7 +12,6 @@ import {
   deleteCustomer,
 } from "@/lib/redux/features/customer/customerSlice";
 import { useDispatch } from "react-redux";
-import TableHead from "./_components/TableHead";
 import CustomerTable from "./_components/CustomerTable";
 import AddCustomerModal from "./_components/AddCustomerModal";
 
