@@ -12,6 +12,7 @@ import ConfirmDeleteModal from "./ConfirmDeleteModal";
 import { useState } from "react";
 import EditCustomerModal from "./EditCustomerModal";
 import { useDispatch } from "react-redux";
+import CustomerDetailModal from "./CustomerDetailModal";
 
 interface CustomerTableProps {
   items: CustomerItem[];
@@ -41,6 +42,10 @@ export default function CustomerTable({
     total_transaction: 0,
   };
   const [editCustomer, setEditCustomer] = useState<CustomerItem>(initialData);
+  const [detailModalOpen, setDetailModalOpen] = useState(false);
+  const [detailCustomer, setDetailCustomer] = useState<CustomerItem | null>(
+    null
+  );
 
   const openDeleteModal = (customer: { id: string; name: string }) => {
     setSelectedCustomer(customer);
@@ -91,6 +96,16 @@ export default function CustomerTable({
     e.preventDefault();
     dispatch(updateCustomer(editCustomer));
     closeEditModal();
+  };
+
+  const openDetailModal = (customer: CustomerItem) => {
+    setDetailCustomer(customer);
+    setDetailModalOpen(true);
+  };
+
+  const closeDetailModal = () => {
+    setDetailModalOpen(false);
+    setDetailCustomer(null);
   };
 
   const numberFormat = (value: number) =>
@@ -151,7 +166,10 @@ export default function CustomerTable({
                 <td>IDR {numberFormat(customer.total_transaction)}</td>
                 <td>
                   <div className="flex gap-1 justify-center">
-                    <button className="py-1 px-3 flex gap-2 items-center bg-neutral rounded-sm">
+                    <button
+                      className="py-1 px-3 flex gap-2 items-center bg-neutral rounded-sm"
+                      onClick={() => openDetailModal(customer)}
+                    >
                       <ShieldSearch size="12" variant="TwoTone" />
                       <span>Detail</span>
                     </button>
@@ -197,6 +215,11 @@ export default function CustomerTable({
         customer={editCustomer}
         onChange={handleEditChange}
         onSubmit={handleEditSubmit}
+      />
+      <CustomerDetailModal
+        open={detailModalOpen}
+        onClose={closeDetailModal}
+        customer={detailCustomer}
       />
     </div>
   );
