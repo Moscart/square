@@ -53,7 +53,7 @@ export default function CustomerDetailModal({
         </div>
         <div className="flex justify-end mt-6">
           <button
-            className="px-4 py-2 rounded bg-primary text-white"
+            className="font-semibold text-sm px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/80 cursor-pointer transition"
             onClick={onClose}
           >
             Close

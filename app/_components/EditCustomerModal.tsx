@@ -107,14 +107,14 @@ export default function EditCustomerModal({
           <div className="flex justify-end gap-2">
             <button
               type="button"
-              className="px-4 py-2 rounded bg-gray-200 text-gray-700"
+              className="font-semibold text-sm px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-100 text-gray-700 cursor-pointer transition"
               onClick={onClose}
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-4 py-2 rounded bg-primary text-white"
+              className="font-semibold text-sm px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/80 cursor-pointer transition"
             >
               Save
             </button>

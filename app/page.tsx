@@ -31,6 +31,7 @@ export default function Home() {
   const [order, setOrder] = useState("asc");
   const itemsPerPage = 10;
   const modalToggleRef = useRef<HTMLInputElement>(null);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const filteredItems = allCustomer.filter((customer) =>
     customer.name.toLowerCase().includes(searchCustomer.toLowerCase())
@@ -95,7 +96,16 @@ export default function Home() {
     if (modalToggleRef.current) {
       modalToggleRef.current.checked = false;
     }
+    setModalOpen(false);
     setFormData(initialData);
+  };
+
+  const handleOpenModal = () => {
+    setModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
   };
 
   return (
@@ -138,13 +148,13 @@ export default function Home() {
                 </div>
                 <div className="max-lg:grid flex gap-4">
                   <div className="max-md:grid flex gap-4 grow">
-                    <label
-                      htmlFor="modal-toggle"
+                    <button
                       className="font-semibold w-fit text-sm flex gap-2 items-center bg-white/20 backdrop-blur-[10px] rounded-lg py-2 px-4 cursor-pointer"
+                      onClick={handleOpenModal}
                     >
                       <Add size="16" />
                       <span className="line-clamp-1">Add New Customer</span>
-                    </label>
+                    </button>
                     <div className="bg-white w-fit rounded-lg flex gap-4 items-center p-1 ps-4 grow">
                       <SearchNormal1
                         size="16"
@@ -320,7 +330,8 @@ export default function Home() {
           </div>
         </div>
         <AddCustomerModal
-          openRef={modalToggleRef}
+          open={modalOpen}
+          onClose={handleCloseModal}
           formData={formData}
           onChange={handleChange}
           onSubmit={handleSubmit}
