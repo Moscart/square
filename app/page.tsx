@@ -24,6 +24,7 @@ import {
 import { useDispatch } from "react-redux";
 import TableHead from "./_components/TableHead";
 import CustomerTable from "./_components/CustomerTable";
+import AddCustomerModal from "./_components/AddCustomerModal";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -237,7 +238,6 @@ export default function Home() {
                 <button className="font-semibold text-sm flex gap-2 items-center bg-white/20 backdrop-blur-[10px] rounded-lg py-3 px-4 w-fit relative z-10">
                   See Analytics
                 </button>
-                {/* <div className="size-[323px] absolute bg-[#5D5FEF] rounded-full border border-[#A5A6F6] top-[106px] left-[84px] -z-10"></div> */}
                 <div className="size-[323px] absolute bg-[#5D5FEF] rounded-full border border-[#A5A6F6] bottom-[160px] translate-y-full right-[144px] translate-x-full -z-10"></div>
                 <div className="size-[323px] absolute bg-[#7879F1] rounded-full border border-[#FFFFFF] bottom-[130px] translate-y-full right-[98px] translate-x-full -z-10"></div>
                 <div className="size-[323px] absolute bg-[#A5A6F6] rounded-full border border-[#F2F2F2] bottom-[100px] translate-y-full right-[56px] translate-x-full -z-10"></div>
@@ -340,123 +340,12 @@ export default function Home() {
             </div>
           </div>
         </div>
-
-        {/* Modal Add Customer */}
-        <div className="">
-          <input
-            type="checkbox"
-            id="modal-toggle"
-            className="peer hidden"
-            ref={modalToggleRef}
-          />
-
-          <label
-            htmlFor="modal-toggle"
-            className="fixed inset-0 bg-black/40 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-200 peer-checked:opacity-100 peer-checked:pointer-events-auto z-10"
-          />
-
-          <div className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-full max-w-xl flex items-center justify-center p-4 pointer-events-none peer-checked:pointer-events-auto opacity-0 peer-checked:opacity-100 transition-all duration-200 transform scale-95 peer-checked:scale-100 z-20">
-            <div className="bg-white rounded-lg shadow-xl w-full mx-auto overflow-hidden">
-              <header className="flex justify-between items-center px-6 py-4 border-b-2 border-border">
-                <h2 className="text-xl font-semibold">Add Customer</h2>
-                <label
-                  htmlFor="modal-toggle"
-                  className="text-2xl leading-none cursor-pointer hover:text-red-500 transition"
-                >
-                  &times;
-                </label>
-              </header>
-
-              <div className="p-6 space-y-4">
-                <form
-                  className="space-y-4 [&:container(width>400px)]:grid [&:container(width>400px)]:grid-cols-2 gap-4"
-                  onSubmit={handleSubmit}
-                >
-                  <div>
-                    <label
-                      className="block text-sm font-medium mb-1"
-                      htmlFor="name"
-                    >
-                      Name
-                    </label>
-                    <input
-                      name="name"
-                      id="name"
-                      type="text"
-                      className="text-xs font-medium w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
-                      required
-                      value={formData.name}
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div>
-                    <label
-                      className="block text-sm font-medium mb-1"
-                      htmlFor="level"
-                    >
-                      Level
-                    </label>
-                    <select
-                      name="level"
-                      id="level"
-                      className="text-xs font-medium w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
-                      required
-                      value={formData.level}
-                      onChange={handleChange}
-                    >
-                      <option value="warga">Warga</option>
-                      <option value="juragan">Juragan</option>
-                      <option value="sultan">Sultan</option>
-                      <option value="konglomerat">Konglomerat</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label
-                      className="block text-sm font-medium mb-1"
-                      htmlFor="favorite_menu"
-                    >
-                      Favorite Menu
-                    </label>
-                    <input
-                      name="favorite_menu"
-                      id="favorite_menu"
-                      type="text"
-                      className="text-xs font-medium w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
-                      required
-                      value={formData.favorite_menu}
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div>
-                    <label
-                      className="block text-sm font-medium mb-1"
-                      htmlFor="total_transaction"
-                    >
-                      Total Transaction
-                    </label>
-                    <input
-                      name="total_transaction"
-                      id="total_transaction"
-                      type="number"
-                      className="text-xs font-medium w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
-                      required
-                      value={formData.total_transaction}
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div className="col-span-2 flex justify-end">
-                    <button
-                      type="submit"
-                      className="font-semibold text-sm px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/80 cursor-pointer transition"
-                    >
-                      Submit
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
+        <AddCustomerModal
+          openRef={modalToggleRef}
+          formData={formData}
+          onChange={handleChange}
+          onSubmit={handleSubmit}
+        />
       </main>
     </div>
   );
